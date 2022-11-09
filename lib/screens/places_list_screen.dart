@@ -28,25 +28,27 @@ class PlacesListScreen extends StatelessWidget {
               child: const Center(
                 child: Text('Got no places yet, start adding some!'),
               ),
-              builder: (context, greatPlaces, ch) =>
-                  snapshot.connectionState == ConnectionState.waiting
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : greatPlaces.items.isEmpty
-                          ? ch!
-                          : ListView.builder(
-                              itemCount: greatPlaces.items.length,
-                              itemBuilder: (context, i) => ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage: FileImage(
-                                    greatPlaces.items[i].image,
-                                  ),
-                                ),
-                                title: Text(greatPlaces.items[i].title),
-                                onTap: () {},
+              builder: (context, greatPlaces, ch) => snapshot.connectionState ==
+                      ConnectionState.waiting
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : greatPlaces.items.isEmpty
+                      ? ch!
+                      : ListView.builder(
+                          itemCount: greatPlaces.items.length,
+                          itemBuilder: (context, i) => ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: FileImage(
+                                greatPlaces.items[i].image,
                               ),
                             ),
+                            title: Text(greatPlaces.items[i].title),
+                            subtitle:
+                                Text(greatPlaces.items[i].location!.address!),
+                            onTap: () {},
+                          ),
+                        ),
             )),
       ),
     );
